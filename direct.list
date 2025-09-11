@@ -1,6 +1,7 @@
 # NAME: Top500Direct
 # DESC: 常见国内/常用网站直连
 # UPDATE: 2025-09-11
+# 参考：https://github.com/h2y/Shadowrocket-ADBlock-Rules/blob/master/sr_top500_whitelist.conf
 
 # 常见域名
 DOMAIN-SUFFIX,163.com
