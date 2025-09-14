@@ -1,0 +1,80 @@
+# ============================
+# Shadowrocket 转换版（由 QuantumultX 懒人配置转换）
+# 原作者: w37fhy（2024/06/02）
+# 说明: 把远程 RULE-SET 保留为原始 raw.github 链接（大多数为域名列表）
+# ============================
+
+[General]
+# 可按需调整（DNS/IPv6 等在 Shadowrocket 客户端设置也可以）
+dns-server = 119.29.29.29, 114.114.114.114
+ipv6 = false
+
+[Proxy]
+# 请在 Shadowrocket 应用中添加你的代理节点（或订阅），这里不写死节点
+# 示例（不要直接复制到 Shadowrocket，直接在 App 中添加节点）：
+# VMESS, node01.node-ip.top, 47228, username=..., password=...
+# Shadowsocks, hk03.node-ip.top, 33129, encrypt-method=aes-256-gcm, password=...
+
+[Proxy Group]
+# 把 QuantumultX 的 policy 对应为 Shadowrocket 的代理组
+🚀 节点选择 = select, 自动选择, 香港, 台湾, 日本, 韩国, 新加坡, 美国, PROXY, DIRECT
+自动选择 = url-test, http://www.gstatic.com/generate_204, interval=600, timeout=5, 香港, 台湾, 日本, 韩国, 新加坡, 美国
+香港 = url-test, http://www.gstatic.com/generate_204, interval=600, timeout=5, 香港节点1, 香港节点2
+台湾 = url-test, http://www.gstatic.com/generate_204, interval=600, timeout=5, 台湾节点1
+日本 = url-test, http://www.gstatic.com/generate_204, interval=600, timeout=5, 日本节点1, 日本节点2
+韩国 = url-test, http://www.gstatic.com/generate_204, interval=600, timeout=5, 韩国节点1
+新加坡 = url-test, http://www.gstatic.com/generate_204, interval=600, timeout=5, 新加坡节点1, 新加坡节点2
+美国 = url-test, http://www.gstatic.com/generate_204, interval=600, timeout=5, 美国节点1, 美国节点2
+TikTok = select, DIRECT, 香港, 台湾, 日本, 韩国, 新加坡, 美国
+OpenAI = select, DIRECT, 香港, 台湾, 日本, 韩国, 新加坡, 美国
+漏网之鱼 = select, 🚀 节点选择, 自动选择, 香港, 台湾, 日本, 韩国, 新加坡, 美国, REJECT, DIRECT
+
+[Rule]
+# --------- 远程 RULE-SET（保留原始仓库 raw 链接，Shadowrocket 支持 RULE-SET 拉取） ---------
+# OpenAI / AI 相关
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/OpenAI/OpenAI.list,OpenAI
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/BardAI/BardAI.list,OpenAI
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Claude/Claude.list,OpenAI
+
+# TikTok 解锁（原仓库 Semporia 的 QX 规则，通常为域名列表）
+RULE-SET,https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Quantumult-X/TikTok.list,TikTok
+
+# 后续修正（Unbreak 修复规则，设置为直连）
+RULE-SET,https://raw.githubusercontent.com/w37fhy/QuantumultX/master/Rules/Unbreak.list,DIRECT
+
+# 轻量广告/隐私/劫持 拦截（REJECT）
+RULE-SET,https://raw.githubusercontent.com/w37fhy/QuantumultX/master/Rules/Advertising.list,REJECT
+RULE-SET,https://raw.githubusercontent.com/w37fhy/QuantumultX/master/Rules/Tracking.list,REJECT
+RULE-SET,https://raw.githubusercontent.com/w37fhy/QuantumultX/master/Rules/Hijacking.list,REJECT
+
+# Google / Streaming / Global / China 列表（Global/China 指向节点选择或直连）
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Google/Google.list,🚀 节点选择
+RULE-SET,https://raw.githubusercontent.com/w37fhy/QuantumultX/master/Rules/Streaming.list,🚀 节点选择
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Global/Global.list,🚀 节点选择
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/China/China.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/ChinaIPs/ChinaIPs.list,DIRECT
+
+# 你可以把更多 rule-provider 的 raw 链接按需替换或添加（上面链接可直接使用或替换为 Surge/DivineEngine 版本）
+
+# --------- 本地规则（等价转换自 filter_local） ---------
+# 拦截（示例与原 filter_local 对应）
+DOMAIN-SUFFIX,sentry.io,REJECT
+DOMAIN-KEYWORD,exitgames.com,🚀 节点选择
+DOMAIN-SUFFIX,bnbstatic.com,🚀 节点选择
+DOMAIN-SUFFIX,local,DIRECT
+
+# 局域网/内网直连
+IP-CIDR,192.168.0.0/16,DIRECT
+IP-CIDR,10.0.0.0/8,DIRECT
+IP-CIDR,172.16.0.0/12,DIRECT
+IP-CIDR,127.0.0.0/8,DIRECT
+IP-CIDR,100.64.0.0/10,DIRECT
+IP-CIDR,224.0.0.0/4,DIRECT
+# IPv6 链路本地（如果 Shadowrocket 支持 IPv6 可改写成 ip6-cidr）
+# ip6-cidr,fe80::/10,DIRECT
+
+# 如果需要，中国 IP 直连（与上面的 RULE-SET China 重复，可视情况保留或注释）
+GEOIP,CN,DIRECT
+
+# FINAL / 兜底
+FINAL,漏网之鱼
