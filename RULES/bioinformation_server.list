@@ -1,3 +1,5 @@
 # 服务器直连
-DOMAIN-SUFFIX,xiyoucloud.pro
-DOMAIN-SUFFIX,xiyoucloud.net
+HOST-SUFFIX,xiyoucloud.pro,SEVER
+HOST-SUFFIX,xiyoucloud.net,SEVER
+#HOST-SUFFIX,iot-tencent.com,WeChat
+#DOMAIN-SUFFIX,apple.com.cn
