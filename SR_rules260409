@@ -1,0 +1,101 @@
+# 因为QX的tz经常断联，所以用gpt辅助将QX的规则和去年写的SR规则综合了一下。其实还是在那些大佬的基础上进行小修小改，更符合我自己的使用方式
+# Shadowrocket merged config
+# merged from your Quantumult X + existing Shadowrocket config
+# revised: 2026-04-09
+
+[General]
+dns-server = 119.29.29.29, 114.114.114.114
+ipv6 = false
+# 可按需保留
+update-url = https://raw.githubusercontent.com/CFONGLIU/shadowrocket-/refs/heads/main/copy_quanX_to_shadowrocket_rules.conf
+
+[Proxy]
+# 节点请在 Shadowrocket App 内添加订阅或手动添加，这里不写死
+
+[Proxy Group]
+🚀 节点选择 = select,♻️ 自动选择,🇭🇰 香港节点,🇨🇳 台湾节点,🇯🇵 日本节点,🇰🇷 韩国节点,🇸🇬 新加坡节点,🇺🇲 美国节点,🇩🇪 德国节点,🇬🇧 英国节点,🇳🇱 荷兰节点,DIRECT,REJECT,interval=600,timeout=5,select=1,url=http://www.gstatic.com/generate_204
+
+👋 手动切换 = select,interval=600,timeout=5,select=0,url=http://www.gstatic.com/generate_204,policy-regex-filter=*
+♻️ 自动选择 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=80,timeout=5,select=0,policy-regex-filter=*
+
+🇭🇰 香港节点 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=80,timeout=5,select=0,policy-regex-filter=(?=.*(🇭🇰|港|HK|(?i)HongKong|(?i)Hong))^((?!(台|日|韩|新|美|德|英|荷|狮城|南朝鲜|US|SG|JP|KR|TW|DE|UK|NL|台灣|美國|韓國|獅城)).)*$
+🇨🇳 台湾节点 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=80,timeout=5,select=0,policy-regex-filter=(?=.*(🇨🇳|台|TW|(?i)Taiwan|台灣))^((?!(港|日|韩|新|美|德|英|荷|狮城|南朝鲜|US|SG|JP|KR|HK|DE|UK|NL|美國|韓國|獅城)).)*$
+🇯🇵 日本节点 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=80,timeout=5,select=0,policy-regex-filter=(?=.*(🇯🇵|日|JP|(?i)Japan|东京|大阪))^((?!(港|台|韩|新|美|德|英|荷|狮城|南朝鲜|US|SG|KR|HK|TW|DE|UK|NL)).)*$
+🇰🇷 韩国节点 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?=.*(🇰🇷|KR|KOR|(?i)Korea|韩国|南朝鲜|首尔|韓))^((?!(港|台|日|新|美|德|英|荷|狮城|US|SG|JP|HK|TW|DE|UK|NL)).)*$
+🇸🇬 新加坡节点 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?=.*(🇸🇬|新加坡|狮城|SG|(?i)Singapore))^((?!(港|台|日|韩|美|德|英|荷|南朝鲜|US|JP|KR|HK|TW|DE|UK|NL)).)*$
+🇺🇲 美国节点 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?=.*(🇺🇸|美|US|USA|(?i)UnitedStates|(?i)America|洛杉矶|西雅图|硅谷))^((?!(港|台|日|韩|新|德|英|荷|狮城|南朝鲜|SG|JP|KR|HK|TW|DE|UK|NL|韓國|台灣|獅城)).)*$
+🇩🇪 德国节点 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?=.*(🇩🇪|德|DE|(?i)Germany|柏林|法兰克福))^((?!(港|台|日|韩|新|美|英|荷|狮城|南朝鲜|US|SG|JP|KR|HK|TW|UK|NL)).)*$
+🇬🇧 英国节点 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?=.*(🇬🇧|英|UK|(?i)UnitedKingdom|(?i)Britain|London|伦敦))^((?!(港|台|日|韩|新|美|德|荷|狮城|南朝鲜|US|SG|JP|KR|HK|TW|DE|NL)).)*$
+🇳🇱 荷兰节点 = url-test,url=http://www.gstatic.com/generate_204,interval=600,tolerance=100,timeout=5,select=0,policy-regex-filter=(?=.*(🇳🇱|荷|NL|(?i)Netherlands|Amsterdam|阿姆斯特丹))^((?!(港|台|日|韩|新|美|德|英|狮城|南朝鲜|US|SG|JP|KR|HK|TW|DE|UK)).)*$
+
+🍎 苹果服务 = select,DIRECT,🚀 节点选择,♻️ 自动选择,🇭🇰 香港节点,🇨🇳 台湾节点,🇯🇵 日本节点,🇰🇷 韩国节点,🇸🇬 新加坡节点,🇺🇲 美国节点,policy-select-name=DIRECT
+🎵 TikTok = select,DIRECT,🇭🇰 香港节点,🇨🇳 台湾节点,🇯🇵 日本节点,🇰🇷 韩国节点,🇸🇬 新加坡节点,🇺🇲 美国节点,🚀 节点选择,♻️ 自动选择,policy-select-name=🇯🇵 日本节点
+🤖 OpenAI = select,🇺🇲 美国节点,🇬🇧 英国节点,🇳🇱 荷兰节点,🇩🇪 德国节点,🇭🇰 香港节点,🇨🇳 台湾节点,🇰🇷 韩国节点,🇸🇬 新加坡节点,🇯🇵 日本节点,🚀 节点选择,policy-select-name=🇺🇲 美国节点
+🎬 Netflix = select,🇭🇰 香港节点,🇨🇳 台湾节点,🇯🇵 日本节点,🇰🇷 韩国节点,🇸🇬 新加坡节点,🇺🇲 美国节点,🇩🇪 德国节点,🇬🇧 英国节点,🇳🇱 荷兰节点,🚀 节点选择,policy-select-name=🇺🇲 美国节点
+🌍 Google = select,🚀 节点选择,♻️ 自动选择,🇭🇰 香港节点,🇨🇳 台湾节点,🇯🇵 日本节点,🇰🇷 韩国节点,🇸🇬 新加坡节点,🇺🇲 美国节点,🇩🇪 德国节点,🇬🇧 英国节点,🇳🇱 荷兰节点,DIRECT,policy-select-name=🇺🇲 美国节点
+✈️ Telegram = select,🚀 节点选择,♻️ 自动选择,🇭🇰 香港节点,🇨🇳 台湾节点,🇯🇵 日本节点,🇰🇷 韩国节点,🇸🇬 新加坡节点,🇺🇲 美国节点,🇩🇪 德国节点,🇬🇧 英国节点,🇳🇱 荷兰节点,DIRECT,policy-select-name=🚀 节点选择
+₿ 加密货币 = select,🚀 节点选择,♻️ 自动选择,🇭🇰 香港节点,🇨🇳 台湾节点,🇯🇵 日本节点,🇰🇷 韩国节点,🇸🇬 新加坡节点,🇺🇲 美国节点,🇩🇪 德国节点,🇬🇧 英国节点,🇳🇱 荷兰节点,DIRECT,policy-select-name=🚀 节点选择
+🐟 漏网之鱼 = select,🚀 节点选择,♻️ 自动选择,🇭🇰 香港节点,🇨🇳 台湾节点,🇯🇵 日本节点,🇰🇷 韩国节点,🇸🇬 新加坡节点,🇺🇲 美国节点,🇩🇪 德国节点,🇬🇧 英国节点,🇳🇱 荷兰节点,DIRECT,policy-select-name=🚀 节点选择
+
+[Rule]
+# ====== 本地优先规则 ======
+DOMAIN-SUFFIX,sentry.io,REJECT
+DOMAIN-KEYWORD,exitgames.com,🚀 节点选择
+DOMAIN-SUFFIX,bnbstatic.com,🚀 节点选择
+DOMAIN-SUFFIX,local,DIRECT
+
+# 局域网 / 内网直连
+IP-CIDR,192.168.0.0/16,DIRECT
+IP-CIDR,10.0.0.0/8,DIRECT
+IP-CIDR,172.16.0.0/12,DIRECT
+IP-CIDR,127.0.0.0/8,DIRECT
+IP-CIDR,100.64.0.0/10,DIRECT
+IP-CIDR,224.0.0.0/4,DIRECT
+IP6-CIDR,FE80::/10,DIRECT
+
+# 你自己的服务器直连
+RULE-SET,https://raw.githubusercontent.com/CFONGLIU/shadowrocket-/refs/heads/main/RULES/bioinformation_server.list,DIRECT
+
+# 修正规则
+RULE-SET,https://raw.githubusercontent.com/w37fhy/QuantumultX/master/Rules/Unbreak.list,DIRECT
+
+# 微信直连
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/WeChat/WeChat.list,DIRECT
+
+# Apple
+RULE-SET,https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Apple.list,🍎 苹果服务
+
+# 国内网站 / 中国 IP
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/China/China.list,DIRECT
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/ChinaIPs/ChinaIPs.list,DIRECT
+
+# OpenAI / AI
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/OpenAI/OpenAI.list,🤖 OpenAI
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/BardAI/BardAI.list,🤖 OpenAI
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Claude/Claude.list,🤖 OpenAI
+
+# TikTok
+RULE-SET,https://raw.githubusercontent.com/Semporia/TikTok-Unlock/master/Quantumult-X/TikTok.list,🎵 TikTok
+
+# Google
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Google/Google.list,🌍 Google
+
+# 加密货币
+RULE-SET,https://raw.githubusercontent.com/w37fhy/QuantumultX/master/Rules/Cryptocurrency,₿ 加密货币
+
+# Telegram
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Telegram/Telegram.list,✈️ Telegram
+
+# Streaming / Netflix / Global
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Netflix/Netflix.list,🎬 Netflix
+RULE-SET,https://raw.githubusercontent.com/w37fhy/QuantumultX/master/Rules/Streaming.list,🚀 节点选择
+RULE-SET,https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/QuantumultX/Global/Global.list,🚀 节点选择
+
+# 可选：中国 IP 兜底
+GEOIP,CN,DIRECT
+
+# 兜底
+FINAL,🐟 漏网之鱼
+
+[URL Rewrite]
+^https?:\/\/(www\.)?(g|google)\.cn url 302 https://www.google.com
